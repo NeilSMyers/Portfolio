@@ -1,9 +1,9 @@
 import React from 'react';
 
-const PortfolioItem = () => {
+const PortfolioItem = (props) => {
   return (
     <div>
-      Item
+      <h3>{props.title}</h3>
     </div>
   );
 }
