@@ -7,10 +7,11 @@ class PortfolioContainer extends Component {
 
     this.state = {
       pageTitle: "welcome",
+      isLoading: false,
       data: [
-        {title: "Quip", category: "eCommerce"}, 
-        {title: "Eventbrite", category: "Scheduling"}, 
-        {title: "Ministry Safe", category: "Enterprise"}
+        {title: "Quip", category: "eCommerce", slug: "quip"}, 
+        {title: "Eventbrite", category: "Scheduling", slug: "eventbrite"}, 
+        {title: "Ministry Safe", category: "Enterprise", slug: "ministry-safe"}
       ]
     }
   }
@@ -23,7 +24,7 @@ class PortfolioContainer extends Component {
 
   portfolioItems() {
     return this.state.data.map((item, index) => {
-      return <PortfolioItem title={item.title} key={index}/>
+      return <PortfolioItem title={item.title} slug={item.slug} key={index}/>
     })
   }
 
@@ -34,6 +35,10 @@ class PortfolioContainer extends Component {
   }
 
   render() {
+    if(this.state.isLoading) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div>
         <h2 onClick={() => this.handlePageTitleUpdate()}>{this.state.pageTitle}</h2>
@@ -42,7 +47,6 @@ class PortfolioContainer extends Component {
         <button onClick={() => this.handleFilter("Scheduling")}>Scheduling</button>
         <button onClick={() => this.handleFilter("Enterprise")}>Enterprise</button>
 
-        <h2>Portfolio Items</h2>
         {this.portfolioItems()}
       </div>
     );
