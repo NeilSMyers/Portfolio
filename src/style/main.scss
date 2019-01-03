@@ -1,6 +1,7 @@
+@import "variables";
+@import "mixins";
 
-.app {
-    margin-top: 2rem;
-    display: grid;
-    justify-items: center;
-}
+@import "portfolio";
+@import "base";
+@import "button";
+@import "navigation";
