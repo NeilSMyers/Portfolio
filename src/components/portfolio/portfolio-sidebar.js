@@ -1,15 +1,16 @@
 import React from 'react';
 
 const PortfolioSidebar = (props) => {
-  const portfolioList = props.data.map(item => {
+  const portfolioList = props.data.map(portfolioItem => {
     return (
-      <div key={item.id} className="portfolio-item-thumb">
+      <div key={portfolioItem.id} className="portfolio-item-thumb">
         <div className="portfolio-thumb-img">
-          <img src={item.thumb_image_url}/>
+          <img src={portfolioItem.thumb_image_url}/>
         </div>
         <div>
-          <h1 className="title">{item.name}</h1>
-          <h2>{item.id}</h2>
+          <h1 className="title">{portfolioItem.name}</h1>
+          <h2>{portfolioItem.id}</h2>
+          <a onClick={() => props.handleDeleteClick(portfolioItem)}>Delete</a>
         </div>
       </div>
     )
