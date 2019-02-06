@@ -17,12 +17,45 @@ class PortfolioForm extends Component {
       url: "",
       thumb_image: "",
       banner_image: "",
-      logo: ""
+      logo: "",
+      editMode: false,
+      apiUrl: "https://neilmyers.devcamp.space/portfolio/portfolio_items",
+      apiAction: "post"
     }
 
     this.thumbRef = React.createRef()
     this.bannerRef = React.createRef()
     this.logoRef = React.createRef()
+  }
+
+  componentDidUpdate() {
+    if (Object.keys(this.props.portfolioToEdit).length > 0) {
+      const {
+        id,
+        name,
+        description,
+        category,
+        position,
+        url,
+        thumb_image_url,
+        banner_image_url,
+        logo_url,
+      } = this.props.portfolioToEdit
+
+      this.props.clearPortfolioToEdit()
+
+      this.setState({
+        id: id,
+        name: name || "",
+        description: description || "",
+        category: category || "",
+        position: position || "",
+        url: url || "",
+        editMode: true,
+        apiUrl: `https://neilmyers.devcamp.space/portfolio/portfolio_items/${id}`,
+        apiAction: "patch"
+      })
+    }
   }
 
   handleBannerDrop = () => {
@@ -84,7 +117,12 @@ class PortfolioForm extends Component {
   }
 
   handleSubmit = event => {
-    axios.post("https://neilmyers.devcamp.space/portfolio/portfolio_items", this.buildForm(), { withCredentials: true})
+    axios({
+      method: this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm(),
+      withCredentials: true
+    })
     .then(response => {
       this.props.handleSuccessfulFormSubmission(response.data.portfolio_item)
 

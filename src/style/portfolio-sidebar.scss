@@ -11,20 +11,24 @@
       justify-content: space-between;
       align-items: center;
 
-
       .title {
         color: $off-white;
         font-size: 1.5em;
       }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 15px;
 
-      .delete-icon {
-        cursor: pointer;
-        color: $off-white;
-        font-size: 1.5em;
-        transition: 0.3s ease-in-out;
+        .action-icon {
+          cursor: pointer;
+          color: $off-white;
+          font-size: 1.5em;
+          transition: 0.3s ease-in-out;
 
-        &:hover {
-          color: $warning;
+          &:hover {
+            color: $warning;
+          }
         }
       }
     }
