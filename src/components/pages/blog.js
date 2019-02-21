@@ -10,6 +10,16 @@ class Blog extends Component {
     this.state = {
       blogItems: []
     }
+    this.activateInfiniteScroll()
+  }
+
+  activateInfiniteScroll = () => {
+    window.onscroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        console.log("more plz")
+      }
+      console.log("scrolling")
+    }
   }
 
   componentWillMount() {
@@ -33,10 +43,10 @@ class Blog extends Component {
     })
 
     return (
-      <div>
-        <h2>Blog</h2>
-        <div>{blogRecords}</div>
-        
+      <div className="blog-container">
+        <div className="content-container">
+          {blogRecords}
+        </div>
       </div>
     );
   }
