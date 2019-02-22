@@ -19,8 +19,11 @@ class Blog extends Component {
 
   activateInfiniteScroll = () => {
     window.onscroll = () => {
+      if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+        return
+      }
       if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        console.log("more plz")
+        this.getBlogItems()
       }
     }
   }
@@ -33,10 +36,10 @@ class Blog extends Component {
     this.setState({
       currentPage: this.state.currentPage + 1
     })
-    axios.get("https://neilmyers.devcamp.space/portfolio/portfolio_blogs", { withCredentials: true })
+    axios.get(`https://neilmyers.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`, { withCredentials: true })
     .then(response => {
       this.setState({
-        blogItems: response.data.portfolio_blogs,
+        blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
         totalCount: response.data.meta.total_records,
         isLoading: false
       })
