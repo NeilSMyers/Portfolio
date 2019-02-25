@@ -14,22 +14,24 @@ class Blog extends Component {
       currentPage: 0,
       isLoading: true
     }
-    this.activateInfiniteScroll()
+    window.addEventListener("scroll", this.onScroll, false)
   }
 
-  activateInfiniteScroll = () => {
-    window.onscroll = () => {
-      if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
-        return
-      }
-      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        this.getBlogItems()
-      }
+  onScroll = () => {
+    if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+      return
+    }
+    if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+      this.getBlogItems()
     }
   }
 
   componentWillMount() {
     this.getBlogItems()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false)
   }
 
   getBlogItems = () => {
