@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactModal from "react-modal"
 
+import BlogForm from "../blog/blog-form"
+
 ReactModal.setAppElement(".app-wrapper")
 
 class BlogModal extends Component {
@@ -22,13 +24,17 @@ class BlogModal extends Component {
     }
   }
 
+  handleSuccessfulFormSubmission = blog => {
+    console.log("blog blog blog", blog)
+  }
+
   render() {
     return (
       <ReactModal 
         style={this.customStyles}
         onRequestClose={() => this.props.handleModalClose()} 
         isOpen={this.props.modalIsOpen}>
-        <h1>modal timeeee</h1>
+        <BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}/>
       </ReactModal>
     );
   }
