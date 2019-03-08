@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import striptags from "striptags"
 import Truncate from "react-truncate"
 
-const BlogItem = () => {
+const BlogItem = props => {
   const {
     id,
     blog_status,
