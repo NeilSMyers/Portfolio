@@ -94,6 +94,7 @@ class Blog extends Component {
         <div className="content-container">
           {blogRecords}
         </div>
+        
         {this.state.isLoading ? 
         (<div className="content-loader">
           <FontAwesomeIcon icon="spinner" spin/>
